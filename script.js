@@ -1,17 +1,92 @@
-const myLib = [];
+const myLibrary = [];
 
-function Book(Name, Author, Read) {
-    this.Name=Name;
-    this.Author=Author;
-    this.Read=Read;
+//standard constructor
+function Book(title, author, pages, read) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
+    this.id = crypto.randomUUID();
 }
 
-function addBookToLib() {
-    const nameofBook = document.getElementById("book_name").value;
-    const nameofAuthor = document.getElementById("author").value;
-    const readCheck = document.getElementById("read").checked;
-
-    const newBook = new Book(nameofBook, nameofAuthor, readCheck);
-    myLib.push(newBook);
+function addBookToLibrary(book) {
+    myLibrary.push(book);
 }
 
+let submit = document.querySelector('form');
+submit.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    let title = document.getElementById('bookinput');
+    let author = document.getElementById('author');
+    let read = document.querySelector('#notRead');
+    let notRead = document.querySelector('#notRead');
+    let isRead = notRead.checked ? 'Not Read' : 'Read';
+    let pages = document.getElementById('pages');
+
+    let error = document.querySelector('#error-msg');
+    error.style.display = 'none';
+    if(!submit.checkValidity()) {
+        error.style.display = 'block';
+        return;
+    }
+
+
+    let bookling = new Book (title.value, author.value, pages.value, isRead);
+    addBookToLibrary(bookling);
+    console.log(myLibrary);
+
+    let display = document.querySelector("#display");
+    let card = document.createElement("div");
+    card.classList.add("cards");
+    
+    let titleDiv = document.createElement("div")
+    titleDiv.classList.add("titleDiv");
+
+    let cardText = document.createElement("h3");
+    cardText.textContent = `${title.value} by ${author.value}`;
+    let pageNumber = document.createElement('h3');
+    pageNumber.textContent = `${pages.value} pages`
+
+    let removeDiv = document.createElement("div");
+    removeDiv.classList.add("removeDiv");
+
+    let removeCard = document.createElement('button');
+    removeCard.classList.add('remove');
+    removeCard.textContent = 'Remove';
+    removeCard.addEventListener('click', () => {
+        display.removeChild(card);
+    });
+
+    let statusDiv = document.createElement('div');
+    statusDiv.classList.add('statusDiv');
+
+    let status = document.createElement('button');
+    status.classList.add('status');
+    status.textContent = isRead;
+    status.style.backgroundColor = (isRead === 'Read') ? 'green' : 'red';
+    status.addEventListener('click', () => {
+        status.textContent = (status.textContent === 'Read') ? 'Not read' : 'Read';
+        status.style.backgroundColor = (status.textContent === 'Read') ? 'green' : 'red';
+    });
+
+
+
+    titleDiv.appendChild(cardText);
+    titleDiv.appendChild(pageNumber);
+    card.appendChild(titleDiv);
+    
+    card.appendChild(statusDiv);
+    statusDiv.appendChild(status);
+    
+    removeDiv.appendChild(removeCard);
+    card.appendChild(removeDiv);
+
+    display.appendChild(card);
+        
+    title.value = '';
+    author.value = '';
+    read.checked = true;
+    notRead.checked = false;
+    pages.value = '';   
+});

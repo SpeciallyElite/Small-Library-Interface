@@ -1,40 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
-    <title>Library_Interface</title>
+    <title>Library</title>
+    <script src="script.js" defer></script>
 </head>
-
 <body>
-    <top>
-        <h1>My Library</h1>
-    </top>
-    <div class="bigcontainer">
-        <div class="form_container">
-            <div class="topButts">
-            <button type="button">+ Add</button>
-            <button type="button">X</button>
-            </div>
 
-            <form class="lowerindex">
-                <input type="text" id="book_name" placeholder="Book Name">
-                <input type="text" id="author" placeholder="Author">
-                <label>
-                    Read:
-                    <input type="checkbox" id="read">
-                </label>
-                <button type="submit" id="i_submit">SUBMIT</button>
-                <button type="reset">RESET</button>
+    <div id="container">
+        <div id="sydebar">
+            <p id="title">OPEN BOOK TRACKER</p>
+            <form novalidate>
+                <p>Add your book here:</p>
+                <div class="textInput">
+                    <label for="bookinput">Book: </label>
+                    <input type="text" id="bookinput" name="aBook" required>
+                </div>
+                <div class="textInput">
+                    <label for="author">Author: </label>
+                    <input type="text" id="author" name="anAuthor" required>
+                </div>
+                <div class="textInput">
+                    <label for="pages">Pages:</label>
+                    <input type="number" id="pages" name="numPages" min="1" required>
+                </div>
+                <fieldset>
+                    <legend>Have you read the book?</legend>
+                    <ul>
+                        <li>
+                            <label for="read">Yes</label>
+                            <input type="radio" id="read" name="Read" required>
+                        </li>
+                        <li>
+                            <label for="notRead">No</label>
+                            <input type="radio" id="notRead" name="Read" required>
+                        </li>
+                    </ul>
+                </fieldset>
+                <div class="buttonSubmit">
+                    <p id="error-msg" style="color: red; display: none;">Wait! You missed a field.</p>
+                    <label for="submitLabel">Submit:</label>
+                    <input type="submit" name="confirmBook" id="submit" value="Submit">
+                </div>
             </form>
         </div>
+        <div id="bookSpace">
+            <p>Your books:</p>
+            <div id="display"></div>
+        </div>
     </div>
-    <div class="smallcontainer" id="smallestcontainer">
 
-    </div>
-    <script src="script.js"></script>
 </body>
-
-</html>
+</html> 
