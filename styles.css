@@ -1,0 +1,27 @@
+.bigcontainer{
+    display: flex;
+    justify-content: center;
+    /* border-radius: 1px;
+    border-color: black;
+    border-style: solid; */
+    width: fit-content;
+    margin: 0 auto;
+}
+
+.lowerindex{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.form_container{
+    text-align: center;
+    gap: 10px;
+    padding-bottom: 10px;
+}
+
+.topButts{
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+}
